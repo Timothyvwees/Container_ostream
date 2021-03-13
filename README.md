@@ -68,4 +68,4 @@ The macro CONTAINER_INDENTIFIER_FOR_PRETTY_CONTAINER_PRINTING will add an indent
  std::unordered_multiset  = UMs
  
 The macro CONTAINER_ELEMENT_SEPERATOR_FOR_PRETTY_PRINTING will do instead of [ 1 2 3 4 5 ] ---> [ {1} {2} {3} {4} {5} ] 
-or [ 1:a 2:b ] ---> [ {1:a} {2:b} ] which might make it easier to read. in general [] indicates a container () indicates a tuple or pair and {} indicates a element in a container without size() function or element access.
+or [ 1:a 2:b ] ---> [ {1:a} {2:b} ] which might make it easier to read. in general [] indicates a container () indicates a tuple or pair  {} indicates a element in a container without size() function or element access and a , indicates size() function and element access.
