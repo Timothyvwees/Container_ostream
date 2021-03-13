@@ -241,12 +241,12 @@ std::ostream& operator<<(std::ostream& os, const std::stack<_Type, _Container>& 
 
     auto stack_copy = stack;
 
-    os STACK_INDENTIFIER << "[";
+    os STACK_INDENTIFIER << "[ ";
     while (stack_copy.size() > 1) {
         os << stack_copy.top() << ", ";
         stack_copy.pop();
     }
-    os << stack_copy.top() << "]";
+    os << stack_copy.top() << " ]";
 
     return os;
 }
@@ -259,12 +259,12 @@ std::ostream& operator<<(std::ostream& os, const std::queue<_Type, _Container>& 
 
     auto queue_copy = queue;
 
-    os QUEUE_INDENTIFIER << "[";
+    os QUEUE_INDENTIFIER << "[ ";
     while (queue_copy.size() > 1) {
         os << queue_copy.front() << ", ";
         queue_copy.pop();
     }
-    os << queue_copy.front() << "]";
+    os << queue_copy.front() << " ]";
 
     return os;
 }
@@ -273,12 +273,12 @@ template <class _Type, class _Container, class _Compare>
 std::ostream& operator<<(std::ostream& os, const std::priority_queue<_Type, _Container, _Compare>& pqueue) {
     auto pqueue_copy = pqueue;
     
-    os PQUEUE_INDENTIFIER << "[";
+    os PQUEUE_INDENTIFIER << "[ ";
     while (pqueue_copy.size() > 1) {
         os << pqueue_copy.top() << ", ";
         pqueue_copy.pop();
     }
-    os << pqueue_copy.top() << "]";
+    os << pqueue_copy.top() << " ]";
 
     return os;
 }
