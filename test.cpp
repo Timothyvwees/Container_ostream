@@ -22,6 +22,7 @@
 //#define CONTAINER_ELEMENT_SEPERATOR_FOR_PRETTY_PRINTING
 #include "Container_ostreams.hpp"
 
+//if you use the no tuple version remove all the tuple stuff rom this file
 typedef std::tuple<int, char, std::string, std::vector<std::array<int, 2>>> test_tuple;
 
 int main() {
@@ -193,5 +194,7 @@ int main() {
 	std::cout << std::endl;
 
 	std::cout << "pair: " << pair << std::endl;
+	std::cout << "tuple: " << tuple00 << std::endl;
+	
 	return 0;
 }
