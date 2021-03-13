@@ -24,3 +24,5 @@ containers std::stack, std::queue and std::priority_queue will print [ 1 2 3 4 ]
 containers std::map, std::multimap, std::unordered_map and std::unordered_multimap will return [ 1:a 2:b 3:c ] where the : indicates one element. the left side of the : is the key and the right side is the type.
 
 containers std::set, std::multiset, std::unordered_set and std::unordered_multiset will return [ 1 2 3 4 ]
+
+in addition to containers I also included a std::pair and std::tuple ostream overload these will print as follows (1, a, hello, 4, 5) or (a, 5)
