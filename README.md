@@ -1,5 +1,5 @@
 # Container_ostream
-This c++ header makes it possible to print every container in c++ using the << operator overloading. You can also print combined containers like std::vector<std::array<int, 5>> or std::vector<std::tuple<int, std::string>>. Currently only fo c++17 and above because of the tuple printing using some c++17 features. If you dont need tuple printing you can use the Container_ostreams.hpp for C++11 and C++14 which are without tuple printing. Some test coded is also included in the main.cpp. this header does not define the container includes like #include<vector> this must be done before including this header. for example:
+This c++ header makes it possible to print every container in c++ using the << operator overloading. You can also print combined containers like std::vector<std::array<int, 5>> or std::vector<std::tuple<int, std::string>>. Currently only for c++17 and above because of the tuple printing using some c++17 features. If you dont need tuple printing you can use the Container_ostreams.hpp for C++11 and C++14 which are without tuple printing. Some test coded is also included in the main.cpp. this header does not define the container includes like #include<vector> this must be done before including this header. for example:
 
 #include <iostream>
 #include <vector> 
