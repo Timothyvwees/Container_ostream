@@ -1,31 +1,26 @@
-//
-//  main.cpp
-//  Punto banco
-//
-//  Created by Timothy van Wees on 03/03/2021.
-//
-
 #include <iostream>
 
-#include <thread>
 #include <array>
 #include <vector>
+#include <deque>
 #include <list>
 #include <forward_list>
-#include <deque>
+
 #include <queue>
 #include <stack>
+
 #include <map>
 #include <set>
-#include <tuple>
+
 #include <unordered_map>
 #include <unordered_set>
+
+#include <tuple>
 
 
 //#define CONTAINER_INDENTIFIER_FOR_PRETTY_CONTAINER_PRINTING
 //#define CONTAINER_ELEMENT_SEPERATOR_FOR_PRETTY_PRINTING
 #include "Container_ostreams.hpp"
-#include "done.hpp"
 
 typedef std::tuple<int, char, std::string, std::vector<std::array<int, 2>>> test_tuple;
 
