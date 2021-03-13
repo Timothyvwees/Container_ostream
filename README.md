@@ -1,6 +1,8 @@
-## Welcome to GitHub Pages
 # Container_ostream
-This c++ header makes it possible to print every container in c++ in the quickest way using the << operator overloading. You can also print nested containers like std::vector<std::array<int, 5>> or std::vector<std::tuple<int, std::string>>. Currently only for c++17 and above because of the tuple printing using some c++17 features. If you dont need tuple printing you can use the Container_ostreams_no_tuple.hpp for C++11 and above which are without tuple printing. test code can be found in test.cpp. this header does not define the container includes like include vector this must be done before including Container_ostream.hpp. for example
+This c++ header makes it possible to print every container in c++ in the quickest way using the << operator overloading. You can also print nested containers like std::vector<std::array<int, 5>> or std::vector<std::tuple<int, std::string>>. Currently only for c++17 and above because of the tuple printing using some c++17 features. If you dont need tuple printing you can use the Container_ostreams_no_tuple.hpp for C++11 and above which are without tuple printing. test code can be found in test.cpp. 
+
+## how to include
+this header does not define the container includes like include vector this must be done before including Container_ostream.hpp. for example
 ```markdown
   #include <iostream>
   #include <vector>
@@ -13,12 +15,12 @@ This will only define the vector ostream overload. This header file can be inclu
 ```
 This will only define the array ostream overload and because the vector ostream overload was already included above will thus not be redefined.
 
+## short explanation how printing will look.
 containers std::array, std::vector and std::deque will be printed as follows:
 ```markdown
 std::array<int, 4> arr = { 1, 2, 3, 4 };
 std::cout << arr << std::endl; //----> will print [ 1, 2, 3, 4 ]
-```
-```markdown
+
 std::vector<int> vec = { 1, 2, 3, 4 };
 std::cout << vec << std::endl; //----> will print [ 1, 2, 3, 4 ]
 ```
@@ -68,8 +70,8 @@ std::pair<int, int> pair = {1, 2};
 std::cout << tuple << std::endl; //----> will print (1, a, hello, [ [ 1, 2 ], [ 3, 4 ], [ 5, 6 ] ])
 std::cout << pair << std::endl; //----> will print (1, 2)
 ```
-
-The printing of the containers can be edited slightly by defining one or both of the macros below: 
+## defines to edit printing
+The printing of the containers can be slightly edited by defining one or both of the macros below: 
 ```markdown
 #define CONTAINER_INDENTIFIER_FOR_PRETTY_CONTAINER_PRINTING
 #define CONTAINER_ELEMENT_SEPERATOR_FOR_PRETTY_PRINTING
