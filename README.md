@@ -26,3 +26,45 @@ containers std::map, std::multimap, std::unordered_map and std::unordered_multim
 containers std::set, std::multiset, std::unordered_set and std::unordered_multiset will return [ 1 2 3 4 ]
 
 in addition to containers I also included a std::pair and std::tuple ostream overload these will print as follows (1, a, hello, 4, 5) or (a, 5)
+
+The printing of the containers can be edited slightly by defining one or both of the macros below: 
+
+  CONTAINER_INDENTIFIER_FOR_PRETTY_CONTAINER_PRINTING
+  
+  CONTAINER_ELEMENT_SEPERATOR_FOR_PRETTY_PRINTING
+  
+The macro CONTAINER_INDENTIFIER_FOR_PRETTY_CONTAINER_PRINTING will add an indentifier in front of every container for example a[ 1, 2, 3 ]. This indicates that the container is an std::array the identifiers are:
+
+ std::array               = a
+ 
+ std::vector              = v
+ 
+ std::deque               = d
+ 
+ std::list                = l
+ 
+ std::forward_list        = fl
+ 
+ std::stack               = st
+ 
+ std::queue               = q
+ 
+ std::priority_queue      = pq
+ 
+ std::map                 = m
+ 
+ std::set                 = s
+ 
+ std::multimap            = Mm
+ 
+ std::multiset            = Ms
+ 
+ std::unordered_map       = Um
+ 
+ std::unordered_multimap  = UMm
+ 
+ std::unordered_set       = Us
+ 
+ std::unordered_multiset  = UMs
+ 
+The macro CONTAINER_ELEMENT_SEPERATOR_FOR_PRETTY_PRINTING will do instead of [ 1 2 3 4 5 ] do [ {1} {2} {3} {4} {5} ] which might make it easier to read.
