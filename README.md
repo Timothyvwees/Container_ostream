@@ -80,7 +80,12 @@ The printing of the containers can be slightly edited by defining one or both of
 #define CONTAINER_INDENTIFIER_FOR_PRETTY_CONTAINER_PRINTING
 #define CONTAINER_ELEMENT_SEPERATOR_FOR_PRETTY_PRINTING
 ```
-The macro CONTAINER_INDENTIFIER_FOR_PRETTY_CONTAINER_PRINTING will add an indentifier in front of every container for example a[ 1, 2, 3 ]. This indicates that the container is an std::array the identifiers are:
+The macro CONTAINER_INDENTIFIER_FOR_PRETTY_CONTAINER_PRINTING will add an indentifier in front of every container for example:
+```markdown
+std::array<int, 4> arr = { 1, 2, 3, 4 };
+std::cout << arr << std::endl; //----> will print a[ 1, 2, 3, 4 ]
+```
+The identifiers are:
 ```markdown
 std::array               = a
 std::vector              = v 
