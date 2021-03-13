@@ -17,7 +17,7 @@ This will only define the array ostream overload and because the vector ostream 
 
 containers std::array, std::vector and std::deque will be printed as follows [ 1, 2 ,3 ,4 ] seperated by a comma
 
-containers std::list and std::forward_list will be printed as follows [ 1 2 3 4 ] not seperated by a comma because these containers do not have a size or element access function and are printed by using a ranged based for loop. This makes it possible to differentiate them.
+containers std::list and std::forward_list will be printed as follows [ 1 2 3 4 ] not seperated by a comma because these containers do not have a size() function or element access function and are printed by using a ranged based for loop. This makes it possible to differentiate them.
 
 containers std::stack, std::queue and std::priority_queue will print as follows [ 1 2 3 4 ] these containers will print where the first element of the print is the first element that will be returned by top() or front() so std::stack will return the reverse [ 4 3 2 1 ] because it is last in first out.
 
@@ -67,4 +67,4 @@ The macro CONTAINER_INDENTIFIER_FOR_PRETTY_CONTAINER_PRINTING will add an indent
  
  std::unordered_multiset  = UMs
  
-The macro CONTAINER_ELEMENT_SEPERATOR_FOR_PRETTY_PRINTING will do instead of [ 1 2 3 4 5 ] do [ {1} {2} {3} {4} {5} ] which might make it easier to read.
+The macro CONTAINER_ELEMENT_SEPERATOR_FOR_PRETTY_PRINTING will do instead of [ 1 2 3 4 5 ] do [ {1} {2} {3} {4} {5} ] or [ 1:a 2:b ] [ {1:a} {2:b} ] which might make it easier to read. in general [] indicates a container () indicates a tuple or pair and {} indicates a element in a container without size() function or element access.
