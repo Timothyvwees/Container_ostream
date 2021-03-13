@@ -1,5 +1,5 @@
 //
-//  Container_ostreams.hpp
+//  Container_ostreams_no_tuple.hpp
 //  Created by Timothy van Wees on 23/02/2021.
 //
 
@@ -406,10 +406,10 @@ std::ostream& operator<<(std::ostream& os, const std::pair<_Type1, _Type2>& pair
 
 
 #else
-#error Dont include Container_ostreams.hpp if ostream is not included somewhere before this one because it wont do anything
+#error Dont include Container_ostreams_no_tuple.hpp if ostream is not included somewhere before this one because it wont do anything
 #endif //no ostream include
 
 //
-//  Container_ostreams.hpp
+//  Container_ostreams_no_tuple.hpp
 //  Created by Timothy van Wees on 23/02/2021.
 //
