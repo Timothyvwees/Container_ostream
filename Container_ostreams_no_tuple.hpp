@@ -5,7 +5,7 @@
 
 #if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
 #else
-//#error this header only supports c++17 and above
+//#error this header only supports c++11 and above
 #endif
 
 
