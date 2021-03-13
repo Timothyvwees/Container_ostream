@@ -2,7 +2,7 @@
 This c++ header makes it possible to print every container in c++ in the quickest way using the << operator overloading. You can also print nested containers like std::vector<std::array<int, 5>> or std::vector<std::tuple<int, std::string>>. Currently only for c++17 and above because of the tuple printing using some c++17 features. If you dont need tuple printing you can use the Container_ostreams_no_tuple.hpp for C++11 and above which are without tuple printing. test code can be found in test.cpp. 
 
 ## how to include
-All the overloads are in an all in one header file which is the hpp file. Simply include this file in an IDE or copy the code. this header does not include anything internally this must be done before including Container_ostream.hpp.For example
+All the overloads are in an all in one header file which is the hpp file. Simply include this file in an IDE or copy the code. this header does not include anything internally this must be done before including Container_ostream.hpp. For example:
 ```markdown
   #include <iostream>
   #include <vector>
@@ -10,10 +10,14 @@ All the overloads are in an all in one header file which is the hpp file. Simply
 ```
 This will only define the vector ostream overload. This header file can be included again if another container type needs to be printed. for example:
 ```markdown
+  #include <iostream>
+  #include <vector>
+  #include "Container_ostreams.hpp"
+  
   #include <array>
   #include "Container_ostreams.hpp"
 ```
-This will only define the array ostream overload and because the vector ostream overload was already included above will thus not be redefined.
+This will only add the definition of the array ostream overload and because the vector ostream overload was already included above will thus not be redefined.
 
 ## short explanation how printing will look.
 containers std::array, std::vector and std::deque will be printed as follows:
