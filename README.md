@@ -71,8 +71,8 @@ std::cout << pair << std::endl; //----> will print (1, 2)
 
 The printing of the containers can be edited slightly by defining one or both of the macros below: 
 ```markdown
-- CONTAINER_INDENTIFIER_FOR_PRETTY_CONTAINER_PRINTING
-- CONTAINER_ELEMENT_SEPERATOR_FOR_PRETTY_PRINTING
+#define CONTAINER_INDENTIFIER_FOR_PRETTY_CONTAINER_PRINTING
+#define CONTAINER_ELEMENT_SEPERATOR_FOR_PRETTY_PRINTING
 ```
 The macro CONTAINER_INDENTIFIER_FOR_PRETTY_CONTAINER_PRINTING will add an indentifier in front of every container for example a[ 1, 2, 3 ]. This indicates that the container is an std::array the identifiers are:
 ```markdown
