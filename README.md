@@ -7,7 +7,7 @@ This c++ header makes it possible to print every container in c++ using the << o
 
   #include Container_ostreams.hpp
   
-This will only define the vector ostream overload. This header file can be included again if another container needs to be printed. for example:
+This will only define the vector ostream overload. This header file can be included again if another container type needs to be printed. for example:
 
   #include array
   
