@@ -2,8 +2,6 @@
 //  Container_ostreams.hpp
 //
 //  Created by Timothy van Wees on 23/02/2021.
-//  Copyright © 2021 Timothy van Wees. All rights reserved.
-//
 
 #if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
 #else
