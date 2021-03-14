@@ -2,7 +2,7 @@
 This c++ header makes it possible to print every container in c++ in the quickest way using the << operator overloading. You can also print nested containers like std::vector<std::array<int, 5>> or std::vector<std::tuple<int, std::string>>. Currently only for c++17 and above because of the tuple printing using some c++17 features. If you dont need tuple printing you can use the Container_ostreams_no_tuple.hpp for C++11 and above which are without tuple printing. test code can be found in test.cpp. 
 
 ## how to include
-You can include Container_ostreams.hpp and define some macros before it to add all overloads do the following:
+You can include Container_ostreams.hpp and define some macros before it. To add all overloads do the following:
 ```markdown
 //#define INCLUDE_SEQUENCE_OSTREAM_CONTAINER_OVERLOADS
 //#define INCLUDE_ADAPTERS_OSTREAM_CONTAINER_OVERLOADS
@@ -13,7 +13,7 @@ You can include Container_ostreams.hpp and define some macros before it to add a
 #define INCLUDE_ALL_OSTREAM_CONTAINER_OVERLOADS
 #include "Container_ostreams.hpp"
 ```
-The tuple overloads will only work on c++17 so if you have c++11 or c++14 dont define INCLUDE_TUPLE_OSTREAM_CONTAINER_OVERLOADS. the INCLUDE_ALL_OSTREAM_CONTAINER_OVERLOADS will include all containers. If you want to include only the sequence containers then only define INCLUDE_SEQUENCE_OSTREAM_CONTAINER_OVERLOADS like so:
+The tuple overloads will only work on c++17 so defining INCLUDE_TUPLE_OSTREAM_CONTAINER_OVERLOADS wont work on c++11 or c++14. If you want to include only a part of the overloads you can do this:
 
 ```markdown
 #define INCLUDE_SEQUENCE_OSTREAM_CONTAINER_OVERLOADS
