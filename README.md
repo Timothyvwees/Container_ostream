@@ -2,22 +2,35 @@
 This c++ header makes it possible to print every container in c++ in the quickest way using the << operator overloading. You can also print nested containers like std::vector<std::array<int, 5>> or std::vector<std::tuple<int, std::string>>. Currently only for c++17 and above because of the tuple printing using some c++17 features. If you dont need tuple printing you can use the Container_ostreams_no_tuple.hpp for C++11 and above which are without tuple printing. test code can be found in test.cpp. 
 
 ## how to include
-All the overloads are in an all in one header file which is the hpp file. Simply include this file in an IDE or copy the code. this header does not include anything internally this must be done before including Container_ostream.hpp. For example:
+You can include Container_ostreams.hpp and define some macros before it to add all overloads do the following:
 ```markdown
-  #include <iostream>
-  #include <vector>
-  #include "Container_ostreams.hpp"
+//#define INCLUDE_SEQUENCE_OSTREAM_CONTAINER_OVERLOADS
+//#define INCLUDE_ADAPTERS_OSTREAM_CONTAINER_OVERLOADS
+//#define INCLUDE_ASSOCIATIVE_OSTREAM_CONTAINER_OVERLOADS
+//#define INCLUDE_UNORDERED_ASSOCIATIVE_OSTREAM_CONTAINER_OVERLOADS
+
+#define INCLUDE_TUPLE_OSTREAM_CONTAINER_OVERLOADS
+#define INCLUDE_ALL_OSTREAM_CONTAINER_OVERLOADS
+#include "Container_ostreams.hpp"
 ```
-This will only define the vector ostream overload. This header file can be included again if another container type needs to be printed. for example:
+The tuple overloads will only work on c++17 so if you have c++11 or c++14 dont define INCLUDE_TUPLE_OSTREAM_CONTAINER_OVERLOADS. the INCLUDE_ALL_OSTREAM_CONTAINER_OVERLOADS will include all containers. If you want to include only the sequence containers then only define INCLUDE_SEQUENCE_OSTREAM_CONTAINER_OVERLOADS like so:
+
 ```markdown
-  #include <iostream>
-  #include <vector>
-  #include "Container_ostreams.hpp"
-  
-  #include <array>
-  #include "Container_ostreams.hpp"
+#define INCLUDE_SEQUENCE_OSTREAM_CONTAINER_OVERLOADS
+//#define INCLUDE_ADAPTERS_OSTREAM_CONTAINER_OVERLOADS
+//#define INCLUDE_ASSOCIATIVE_OSTREAM_CONTAINER_OVERLOADS
+//#define INCLUDE_UNORDERED_ASSOCIATIVE_OSTREAM_CONTAINER_OVERLOADS
+
+#define INCLUDE_TUPLE_OSTREAM_CONTAINER_OVERLOADS
+//#define INCLUDE_ALL_OSTREAM_CONTAINER_OVERLOADS
+#include "Container_ostreams.hpp"
 ```
-This will only add the definition of the array ostream overload and because the vector ostream overload was already included above will thus not be redefined.
+```markdown
+INCLUDE_SEQUENCE_OSTREAM_CONTAINER_OVERLOADS will include std::array, std::vector, std::deque, std::list and std::forward_list.
+INCLUDE_ADAPTERS_OSTREAM_CONTAINER_OVERLOADS will include std::stack, std::queue and std::priority_queue.
+INCLUDE_ASSOCIATIVE_OSTREAM_CONTAINER_OVERLOADS will include std::map, std::multimap std::set and std::multiset
+INCLUDE_UNORDERED_ASSOCIATIVE_OSTREAM_CONTAINER_OVERLOADS will include std::unordered_map, std::unordered_multimap std::unordered_set and std::unordered_multiset
+```
 
 ## short explanation how printing will look.
 containers std::array, std::vector and std::deque will be printed as follows:
