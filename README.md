@@ -90,10 +90,10 @@ std::cout << pair << std::endl; //----> will print (1, 2)
 ## defines to edit printing
 The printing of the containers can be slightly edited by defining one or both of the macros below: 
 ```markdown
-#define CONTAINER_INDENTIFIER_FOR_PRETTY_CONTAINER_PRINTING
-#define CONTAINER_ELEMENT_SEPERATOR_FOR_PRETTY_PRINTING
+#define USE_CONTAINER_OSTREAMS_INDENTIFIERS
+#define USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR
 ```
-The macro CONTAINER_INDENTIFIER_FOR_PRETTY_CONTAINER_PRINTING will add an indentifier in front of every container for example:
+The macro USE_CONTAINER_OSTREAMS_INDENTIFIERS will add an indentifier in front of every container for example:
 ```markdown
 std::array<int, 4> arr = { 1, 2, 3, 4 };
 std::cout << arr << std::endl; //----> will print a[ 1, 2, 3, 4 ]
@@ -117,7 +117,7 @@ std::unordered_multimap  = UMm
 std::unordered_set       = Us
 std::unordered_multiset  = UMs
 ```
-The macro CONTAINER_ELEMENT_SEPERATOR_FOR_PRETTY_PRINTING will do the following which might make it easier to read:
+The macro USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR will do the following which might make it easier to read:
 ```markdown
 not [ 1 2 3 4 5 ] but [ {1} {2} {3} {4} {5} ]
 not [ 1:a 2:b ] but [ {1:a} {2:b} ] 
