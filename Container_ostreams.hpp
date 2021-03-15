@@ -8,6 +8,10 @@
 #ifndef CONTAINER_OSTREAMS_GUARD
 #define CONTAINER_OSTREAMS_GUARD
 
+//this is for programming purpose dont define them inside this file
+//#define INCLUDE_TUPLE_OSTREAM_CONTAINER_OVERLOADS
+//#define INCLUDE_ALL_OSTREAM_CONTAINER_OVERLOADS
+
 #include <iostream>
 
 #ifdef USE_CONTAINER_OSTREAMS_INDENTIFIERS
@@ -52,12 +56,24 @@
 #define UNORDEDED_MULTISET_INDENTIFIER
 #endif
 
-#ifdef USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR
-#define USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << "{"
-#define USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END << "} "
+#ifdef USE_CONTAINER_OSTREAMS_SPACES
+#define OSTREAM_CONTAINER_COMMA ", "
+
+#define OSTREAM_CONTAINER_BEGIN "[ "
+#define OSTREAM_CONTAINER_END " ]"
+
+#define OSTREAM_TUPLE_BEGIN "( "
+#define OSTREAM_TUPLE_END " )"
+
 #else
-#define USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN
-#define USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END << " "
+#define OSTREAM_CONTAINER_COMMA ","
+
+#define OSTREAM_CONTAINER_BEGIN "["
+#define OSTREAM_CONTAINER_END "]"
+
+#define OSTREAM_TUPLE_BEGIN "("
+#define OSTREAM_TUPLE_END ")"
+
 #endif
 
 #if defined(INCLUDE_ALL_OSTREAM_CONTAINER_OVERLOADS) || defined(INCLUDE_SEQUENCE_OSTREAM_CONTAINER_OVERLOADS)
@@ -152,7 +168,7 @@ std::ostream& operator<<(std::ostream& os, const std::unordered_multiset<_Key, _
 #include <tuple>
 #include <utility>
 /*--------------------These are all the tuples types-----------------------------*/
-template <std::size_t tuple_pos, class... _Types>
+template <std::size_t tuple_pos = 0ULL, class... _Types>
 constexpr void print_tuple_excluding_last(std::ostream& os, const std::tuple<_Types...>& tuple);
 
 template<class... _Types>
@@ -169,51 +185,76 @@ std::ostream& operator<<(std::ostream& os, const std::pair<_Type1, _Type2>& pair
 /*----------------------These are all the sequence containers--------------------*/
 template <class _Type, std::size_t _Size>
 std::ostream& operator<<(std::ostream& os, const std::array<_Type, _Size>& arr) {
-	os ARRAY_INDENTIFIER << "[ ";
-	for (std::size_t i = 0ULL; i < (arr.size() - 1ULL); i++) {
-		os << arr[i] << ", ";
+	os ARRAY_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
+	if (!arr.empty()) {
+		os << arr.front();
+		auto it_begin = ++arr.begin();
+		auto it_end = arr.end();
+		std::for_each(it_begin, it_end, [&](const auto& element) {
+			os << OSTREAM_CONTAINER_COMMA << element;
+		});
 	}
-	os << arr.back() << " ]";
+	os << OSTREAM_CONTAINER_END;
 	return os;
 }
 
 template <class _Type, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::vector<_Type, _Alloc>& vec) {
-	os VECTOR_INDENTIFIER << "[ ";
-	for (std::size_t i = 0ULL; i < (vec.size() - 1ULL); i++) {
-		os << vec[i] << ", ";
+	os VECTOR_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
+	if (!vec.empty()) {
+		os << vec.front();
+		auto it_begin = ++vec.begin();
+		auto it_end = vec.end();
+		std::for_each(it_begin, it_end, [&](const auto& element) {
+			os << OSTREAM_CONTAINER_COMMA << element;
+		});
 	}
-	os << vec.back() << " ]";
+	os << OSTREAM_CONTAINER_END;
 	return os;
 }
 
 template <class _Type, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::deque<_Type, _Alloc>& deq) {
-	os DEQUE_INDENTIFIER << "[ ";
-	for (std::size_t i = 0ULL; i < (deq.size() - 1ULL); i++) {
-		os << deq[i] << ", ";
+	os DEQUE_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
+	if (!deq.empty()) {
+		os << deq.front();
+		auto it_begin = ++deq.begin();
+		auto it_end = deq.end();
+		std::for_each(it_begin, it_end, [&](const auto& element) {
+			os << OSTREAM_CONTAINER_COMMA << element;
+		});
 	}
-	os << deq.back() << " ]";
+	os << OSTREAM_CONTAINER_END;
 	return os;
 }
 
 template <class _Type, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::list<_Type, _Alloc>& list) {
-	os LIST_INDENTIFIER << "[ ";
-	for (const auto& element : list) {
-		os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
+	os LIST_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
+	if (!list.empty()) {
+		os << list.front();
+		auto it_begin = ++list.begin();
+		auto it_end = list.end();
+		std::for_each(it_begin, it_end, [&](const auto& element) {
+			os << OSTREAM_CONTAINER_COMMA << element;
+		});
 	}
-	os << "]";
+	os << OSTREAM_CONTAINER_END;
 	return os;
 }
 
 template <class _Type, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::forward_list<_Type, _Alloc>& flist) {
-	os FLIST_INDENTIFIER << "[ ";
-	for (const auto& element : flist) {
-		os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
+	os FLIST_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
+	if (!flist.empty() ) {
+		os << flist.front();
+		auto it_begin = ++flist.begin();
+		auto it_end = flist.end();
+		std::for_each(it_begin, it_end, [&](const auto& element) {
+			os << OSTREAM_CONTAINER_COMMA << element;
+		});
 	}
-	os << "]";
+	os << OSTREAM_CONTAINER_END;
 	return os;
 }
 /*-----------------------------------------------------------------------------*/
@@ -227,12 +268,12 @@ template <class _Type, class _Container>
 std::ostream& operator<<(std::ostream& os, const std::stack<_Type, _Container>& stack) {
 	auto stack_copy = stack;
 
-	os STACK_INDENTIFIER << "[ ";
+	os STACK_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
 	while (stack_copy.size() > 1ULL) {
-		os << stack_copy.top() << ", ";
+		os << stack_copy.top() << OSTREAM_CONTAINER_COMMA;
 		stack_copy.pop();
 	}
-	os << stack_copy.top() << " ]";
+	os << stack_copy.top() << OSTREAM_CONTAINER_END;
 	return os;
 }
 
@@ -240,12 +281,12 @@ template <class _Type, class _Container>
 std::ostream& operator<<(std::ostream& os, const std::queue<_Type, _Container>& queue) {
 	auto queue_copy = queue;
 
-	os QUEUE_INDENTIFIER << "[ ";
+	os QUEUE_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
 	while (queue_copy.size() > 1ULL) {
-		os << queue_copy.front() << ", ";
+		os << queue_copy.front() << OSTREAM_CONTAINER_COMMA;
 		queue_copy.pop();
 	}
-	os << queue_copy.front() << " ]";
+	os << queue_copy.front() << OSTREAM_CONTAINER_END;
 	return os;
 }
 
@@ -253,12 +294,12 @@ template <class _Type, class _Container, class _Compare>
 std::ostream& operator<<(std::ostream& os, const std::priority_queue<_Type, _Container, _Compare>& pqueue) {
 	auto pqueue_copy = pqueue;
 
-	os PQUEUE_INDENTIFIER << "[ ";
+	os PQUEUE_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
 	while (pqueue_copy.size() > 1ULL) {
-		os << pqueue_copy.top() << ", ";
+		os << pqueue_copy.top() << OSTREAM_CONTAINER_COMMA;
 		pqueue_copy.pop();
 	}
-	os << pqueue_copy.top() << " ]";
+	os << pqueue_copy.top() << OSTREAM_CONTAINER_END;
 	return os;
 }
 /*-------------------------------------------------------------------------------*/
@@ -270,42 +311,69 @@ std::ostream& operator<<(std::ostream& os, const std::priority_queue<_Type, _Con
 /*----------------------These are all the associative containers---------------*/
 template <class _Key, class _Types, class _Compare, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::map<_Key, _Types, _Compare, _Alloc>& map){
-	os MAP_INDENTIFIER << "[ ";
-	for (const auto& element : map) {
-		os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element.first << ":" << element.second USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
+	os MAP_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
+	if (!map.empty()) {
+		auto it_begin = map.begin();
+		os << it_begin->first << ":" << it_begin->second;
+		++it_begin;
+
+		auto it_end = map.end();
+
+		std::for_each(it_begin, it_end, [&](const auto& element) {
+			os << OSTREAM_CONTAINER_COMMA << element.first << ":" << element.second;
+		});
 	}
-	os << "]";
+	os << OSTREAM_CONTAINER_END;
 	return os;
 }
 
 template <class _Key, class _Types, class _Compare, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::multimap<_Key, _Types, _Compare, _Alloc>& multimap){
-	os MULTIMAP_INDENTIFIER << "[ ";
-
-	for (const auto& element : multimap) {
-		os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element.first << ":" << element.second USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
+	os MULTIMAP_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
+	if (!multimap.empty()) {
+		auto it_begin = multimap.begin();
+		os << it_begin->first << ":" << it_begin->second;
+		++it_begin;
+		auto it_end = multimap.end();
+		std::for_each(it_begin, it_end, [&](const auto& element) {
+			os << OSTREAM_CONTAINER_COMMA << element.first << ":" << element.second;
+		});
 	}
-	os << "]";
+	os << OSTREAM_CONTAINER_END;
 	return os;
 }
 
 template <class _Key, class _Compare, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::set<_Key, _Compare, _Alloc>& set) {
-	os SET_INDENTIFIER << "[ ";
-	for (const auto& element : set) {
-		os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
+	os SET_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
+	if (!set.empty()) {
+		auto it_begin = set.begin();
+		os << *it_begin;
+		++it_begin;
+		auto it_end = set.end();
+		std::for_each(it_begin, it_end, [&](const auto& element) {
+			os << OSTREAM_CONTAINER_COMMA << element;
+		});
 	}
-	os << "]";
+	os << OSTREAM_CONTAINER_END;
 	return os;
 }
 
 template <class _Key, class _Compare, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::multiset<_Key, _Compare, _Alloc>& multiset) {
-	os MULTISET_INDENTIFIER << "[ ";
-	for (const auto& element : multiset) {
-		os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
+	os MULTISET_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
+	if (!multiset.empty()) {
+		auto it_begin = multiset.begin();
+		os  << *it_begin;
+		++it_begin;
+
+		auto it_end = multiset.end();
+
+		std::for_each(it_begin, it_end, [&](const auto& element) {
+			os << OSTREAM_CONTAINER_COMMA << element;
+		});
 	}
-	os << "]";
+	os << OSTREAM_CONTAINER_END;
 	return os;
 }
 /*------------------------------------------------------------------------------*/
@@ -317,41 +385,65 @@ std::ostream& operator<<(std::ostream& os, const std::multiset<_Key, _Compare, _
 /*-----------------These are all the unordered associative containers-----------*/
 template <class _Key, class _Types, class _Hasher, class _Keyeq, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::unordered_map<_Key, _Types, _Hasher, _Keyeq, _Alloc>& unordered_map){
-	os UNORDEDED_MAP_INDENTIFIER << "[ ";
-	for (const auto& element : unordered_map) {
-		os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element.first << ":" << element.second USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
+	os UNORDEDED_MAP_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
+	if (!unordered_map.empty()) {
+		auto it_begin = unordered_map.begin();
+		os << it_begin->first << ":" << it_begin->second;
+		++it_begin;
+		auto it_end = unordered_map.end();
+		std::for_each(it_begin, it_end, [&](const auto& element) {
+			os << OSTREAM_CONTAINER_COMMA << element.first << ":" << element.second;
+		});
 	}
-	os << "]";
+	os << OSTREAM_CONTAINER_END;
 	return os;
 }
 
 template <class _Key, class _Types, class _Hasher, class _Keyeq, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::unordered_multimap<_Key, _Types, _Hasher, _Keyeq, _Alloc>& unordered_multimap){
-	os UNORDEDED_MULTIMAP_INDENTIFIER << "[ ";
-	for (const auto& element : unordered_multimap) {
-		os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element.first << ":" << element.second USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
+	os UNORDEDED_MULTIMAP_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
+	if (!unordered_multimap.empty()) {
+		auto it_begin = unordered_multimap.begin();
+		os << it_begin->first << ":" << it_begin->second;
+		++it_begin;
+		auto it_end = unordered_multimap.end();
+		std::for_each(it_begin, it_end, [&](const auto& element) {
+			os << OSTREAM_CONTAINER_COMMA << element.first << ":" << element.second;
+		});
 	}
-	os << "]";
+	os << OSTREAM_CONTAINER_END;
 	return os;
 }
 
 template <class _Key, class _Hasher, class _Keyeq, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::unordered_set<_Key, _Hasher, _Keyeq, _Alloc>& unordered_set) {
-	os UNORDEDED_SET_INDENTIFIER << "[ ";
-	for (const auto& element : unordered_set) {
-		os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
+	os UNORDEDED_SET_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
+	if (!unordered_set.empty()) {
+		auto it_begin = unordered_set.begin();
+		os << *it_begin;
+		++it_begin;
+		auto it_end = unordered_set.end();
+		std::for_each(it_begin, it_end, [&](const auto& element) {
+			os << OSTREAM_CONTAINER_COMMA << element;
+		});
 	}
-	os << "]";
+	os << OSTREAM_CONTAINER_END;
 	return os;
 }
 
 template <class _Key, class _Hasher, class _Keyeq, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::unordered_multiset<_Key, _Hasher, _Keyeq, _Alloc>& unordered_multiset) {
-	os UNORDEDED_MULTISET_INDENTIFIER << "[ ";
-	for (const auto& element : unordered_multiset) {
-		os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
+	os UNORDEDED_MULTISET_INDENTIFIER << OSTREAM_CONTAINER_BEGIN;
+	if (!unordered_multiset.empty()) {
+		auto it_begin = unordered_multiset.begin();
+		os << *it_begin;
+		++it_begin;
+		auto it_end = unordered_multiset.end();
+		std::for_each(it_begin, it_end, [&](const auto& element) {
+			os << OSTREAM_CONTAINER_COMMA << element;
+		});
 	}
-	os << "]";
+	os << OSTREAM_CONTAINER_END;
 	return os;
 }
 /*-------------------------------------------------------------------------------*/
@@ -361,7 +453,7 @@ std::ostream& operator<<(std::ostream& os, const std::unordered_multiset<_Key, _
 
 #if defined(INCLUDE_TUPLE_OSTREAM_CONTAINER_OVERLOADS)
 /*--------------------These are all the tuples types-----------------------------*/
-template <std::size_t tuple_pos = 0ULL, class... _Types>
+template <std::size_t tuple_pos, class... _Types>
 constexpr void print_tuple_excluding_last(std::ostream& os, const std::tuple<_Types...>& tuple) {
 #if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
 	if constexpr (tuple_pos == (sizeof...(_Types) - 1ULL)) {
@@ -371,7 +463,7 @@ constexpr void print_tuple_excluding_last(std::ostream& os, const std::tuple<_Ty
 		return;
 	}
 	else {
-		os << std::get<tuple_pos>(tuple) << ", ";
+		os << std::get<tuple_pos>(tuple) << OSTREAM_CONTAINER_COMMA;
 		print_tuple_excluding_last<tuple_pos + 1ULL>(os, tuple);
 	}
 }
@@ -379,15 +471,15 @@ constexpr void print_tuple_excluding_last(std::ostream& os, const std::tuple<_Ty
 template<class... _Types>
 std::ostream& operator<<(std::ostream & os, const std::tuple<_Types...>&tuple) {
 	const auto tuple_last_type = std::tuple_size<std::tuple<_Types...>>::value - 1ULL;
-	os << "(";
+	os << OSTREAM_TUPLE_BEGIN;
 	print_tuple_excluding_last(os, tuple);
-	os << std::get<tuple_last_type>(tuple) << ")";
+	os << std::get<tuple_last_type>(tuple) << OSTREAM_TUPLE_END;
 	return os;
 }
 
 template<class _Type1, class _Type2>
 std::ostream& operator<<(std::ostream & os, const std::pair<_Type1, _Type2>&pair) {
-	os << "(" << pair.first << ", " << pair.second << ")";
+	os << OSTREAM_TUPLE_BEGIN << pair.first << OSTREAM_CONTAINER_COMMA << pair.second << OSTREAM_TUPLE_END;
 	return os;
 }
 /*-------------------------------------------------------------------------------*/
