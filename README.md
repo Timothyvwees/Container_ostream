@@ -44,7 +44,7 @@ std::cout << vec << std::endl; //----> will print [1,2,3,4]
 containers std::list and std::forward_list will be printed as follows 
 ```markdown
 std::list<int> list = { 1, 2, 3, 4 };
-std::cout << list << std::endl; //----> will print [1,2,3,4,]
+std::cout << list << std::endl; //----> will print [1,2,3,4]
 ```
 
 containers std::stack, std::queue and std::priority_queue will print as follows:
@@ -69,7 +69,7 @@ map.insert(std::make_pair(3, "hello"));
 map.insert(std::make_pair(4, "hello"));
 map.insert(std::make_pair(2, "hello"));
 map.insert(std::make_pair(1, "hello"));
-std::cout << map << std::endl; //----> will print [1:hello,2:hello,3:hello,4:hello,]
+std::cout << map << std::endl; //----> will print [1:hello,2:hello,3:hello,4:hello]
 ```
 where the sign : indicates one element. the left side of the : is the key and the right side is the type.
 
@@ -77,7 +77,7 @@ containers std::set, std::multiset, std::unordered_set and std::unordered_multis
 ```markdown
 uint64_t temp_arr[] = { 1, 1, 2, 3, 4, 2, 1 };
 std::set<uint64_t> set(temp_arr, temp_arr + 7);
-std::cout << set << std::endl; //----> will print [1,2,3,4,]
+std::cout << set << std::endl; //----> will print [1,2,3,4]
 ```
 in addition to containers I also included a std::pair and std::tuple ostream overload these will print as follows:
 ```markdown
