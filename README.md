@@ -36,27 +36,26 @@ INCLUDE_UNORDERED_ASSOCIATIVE_OSTREAM_CONTAINER_OVERLOADS will include std::unor
 containers std::array, std::vector and std::deque will be printed as follows:
 ```markdown
 std::array<int, 4> arr = { 1, 2, 3, 4 };
-std::cout << arr << std::endl; //----> will print [ 1, 2, 3, 4 ]
+std::cout << arr << std::endl; //----> will print [1,2,3,4]
 
 std::vector<int> vec = { 1, 2, 3, 4 };
-std::cout << vec << std::endl; //----> will print [ 1, 2, 3, 4 ]
+std::cout << vec << std::endl; //----> will print [1,2,3,4]
 ```
 containers std::list and std::forward_list will be printed as follows 
 ```markdown
 std::list<int> list = { 1, 2, 3, 4 };
-std::cout << list << std::endl; //----> will print [ 1 2 3 4 ]
+std::cout << list << std::endl; //----> will print [1,2,3,4,]
 ```
-The elements are not seperated by a comma because these containers do not have a size() function or element access function and are printed by using a ranged based for loop. This makes it possible to differentiate them.
 
 containers std::stack, std::queue and std::priority_queue will print as follows:
 ```markdown
 std::deque<int> deque = { 1, 10, 2, 3, 4, 5, 7 };
   
 std::stack<int> stack(deque);
-std::cout << stack << std::endl; //----> will print [ 7 5 4 3 2 10 1 ]
+std::cout << stack << std::endl; //----> will print [7,5,4,3,2,10,1]
   
 std::queue<int> queue(deque);
-std::cout << queue << std::endl; //----> will print [ 1 10 2 3 4 5 7]
+std::cout << queue << std::endl; //----> will print [1,10,2,3,4,5,7]
 ```
 these containers will print where the first element of the print is the first element that will be returned by top() or front() so std::stack will return the reverse because it is last in first out.
 
@@ -70,7 +69,7 @@ map.insert(std::make_pair(3, "hello"));
 map.insert(std::make_pair(4, "hello"));
 map.insert(std::make_pair(2, "hello"));
 map.insert(std::make_pair(1, "hello"));
-std::cout << map << std::endl; //----> will print [ 1:hello 2:hello 3:hello 4:hello ]
+std::cout << map << std::endl; //----> will print [1:hello,2:hello,3:hello,4:hello,]
 ```
 where the sign : indicates one element. the left side of the : is the key and the right side is the type.
 
@@ -78,25 +77,25 @@ containers std::set, std::multiset, std::unordered_set and std::unordered_multis
 ```markdown
 uint64_t temp_arr[] = { 1, 1, 2, 3, 4, 2, 1 };
 std::set<uint64_t> set(temp_arr, temp_arr + 7);
-std::cout << set << std::endl; //----> will print [ 1 2 3 4 ]
+std::cout << set << std::endl; //----> will print [1,2,3,4,]
 ```
 in addition to containers I also included a std::pair and std::tuple ostream overload these will print as follows:
 ```markdown
 std::tuple<int, char, std::string, std::vector<std::array<int, 2>>> tuple = { 1, 'a', "hello", {{ 1, 2 }, { 3, 4 }, { 5, 6 }} };
 std::pair<int, int> pair = {1, 2};
-std::cout << tuple << std::endl; //----> will print (1, a, hello, [ [ 1, 2 ], [ 3, 4 ], [ 5, 6 ] ])
-std::cout << pair << std::endl; //----> will print (1, 2)
+std::cout << tuple << std::endl; //----> will print (1,a,hello,[[1,2],[3,4],[5,6]])
+std::cout << pair << std::endl; //----> will print (1,2)
 ```
 ## defines to edit printing
 The printing of the containers can be slightly edited by defining one or both of the macros below: 
 ```markdown
 #define USE_CONTAINER_OSTREAMS_INDENTIFIERS
-#define USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR
+#define USE_CONTAINER_OSTREAMS_SPACES
 ```
 The macro USE_CONTAINER_OSTREAMS_INDENTIFIERS will add an indentifier in front of every container for example:
 ```markdown
 std::array<int, 4> arr = { 1, 2, 3, 4 };
-std::cout << arr << std::endl; //----> will print a[ 1, 2, 3, 4 ]
+std::cout << arr << std::endl; //----> will print a[1,2,3,4]
 ```
 The identifiers are:
 ```markdown
@@ -117,9 +116,8 @@ std::unordered_multimap  = UMm
 std::unordered_set       = Us
 std::unordered_multiset  = UMs
 ```
-The macro USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR will do the following which might make it easier to read:
+The macro USE_CONTAINER_OSTREAMS_SPACES will do the following which might make it easier to read:
 ```markdown
-not [ 1 2 3 4 5 ] but [ {1} {2} {3} {4} {5} ]
-not [ 1:a 2:b ] but [ {1:a} {2:b} ] 
+not [1,2,3,4,5] but [ 1, 2, 3, 4, 5 ]
+not [1:a,2:b] but [ 1:a, 2:b ] 
  ```
-In general [] indicates a container () indicates a tuple or pair  {} indicates a element in a container without size() function or element access and a , indicates size() function and element access.
