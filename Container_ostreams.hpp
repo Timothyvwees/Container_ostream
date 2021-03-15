@@ -5,6 +5,9 @@
 
 #pragma once
 
+#ifndef CONTAINER_OSTREAMS_GUARD
+#define CONTAINER_OSTREAMS_GUARD
+
 #include <iostream>
 
 #ifdef USE_CONTAINER_OSTREAMS_INDENTIFIERS
@@ -165,53 +168,53 @@ std::ostream& operator<<(std::ostream& os, const std::pair<_Type1, _Type2>& pair
 #if defined(INCLUDE_ALL_OSTREAM_CONTAINER_OVERLOADS) || defined(INCLUDE_SEQUENCE_OSTREAM_CONTAINER_OVERLOADS)
 /*----------------------These are all the sequence containers--------------------*/
 template <class _Type, std::size_t _Size>
-std::ostream& operator<<(std::ostream& os, const std::array<_Type, _Size>& arr){
-	os ARRAY_INDENTIFIER << "[ ";
-	for (std::size_t i = 0; i < (arr.size() - 1ULL); i++) {
-		os << arr[i] << ", ";
-	}
-	os << arr.back() << " ]";
-	return os;
+std::ostream& operator<<(std::ostream& os, const std::array<_Type, _Size>& arr) {
+    os ARRAY_INDENTIFIER << "[ ";
+    for (std::size_t i = 0ULL; i < (arr.size() - 1ULL); i++) {
+        os << arr[i] << ", ";
+    }
+    os << arr.back() << " ]";
+    return os;
 }
 
 template <class _Type, class _Alloc>
-std::ostream& operator<<(std::ostream& os, const std::vector<_Type, _Alloc>& vec){
-	os VECTOR_INDENTIFIER << "[ ";
-	for (std::size_t i = 0; i < (vec.size() - 1ULL); i++) {
-		os << vec[i] << ", ";
-	}
-	os << vec.back() << " ]";
-	return os;
+std::ostream& operator<<(std::ostream& os, const std::vector<_Type, _Alloc>& vec) {
+    os VECTOR_INDENTIFIER << "[ ";
+    for (std::size_t i = 0ULL; i < (vec.size() - 1ULL); i++) {
+        os << vec[i] << ", ";
+    }
+    os << vec.back() << " ]";
+    return os;
 }
 
 template <class _Type, class _Alloc>
-std::ostream& operator<<(std::ostream& os, const std::deque<_Type, _Alloc>& deq){
-	os DEQUE_INDENTIFIER << "[ ";
-	for (std::size_t i = 0; i < (deq.size() - 1ULL); i++) {
-		os << deq[i] << ", ";
-	}
-	os << deq.back() << " ]";
-	return os;
+std::ostream& operator<<(std::ostream& os, const std::deque<_Type, _Alloc>& deq) {
+    os DEQUE_INDENTIFIER << "[ ";
+    for (std::size_t i = 0ULL; i < (deq.size() - 1ULL); i++) {
+        os << deq[i] << ", ";
+    }
+    os << deq.back() << " ]";
+    return os;
 }
 
 template <class _Type, class _Alloc>
-std::ostream& operator<<(std::ostream& os, const std::list<_Type, _Alloc>& list){
+std::ostream& operator<<(std::ostream& os, const std::list<_Type, _Alloc>& list) {
     os LIST_INDENTIFIER << "[ ";
     for (const auto& element : list) {
         os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
     }
     os << "]";
-	return os;
+    return os;
 }
 
 template <class _Type, class _Alloc>
-std::ostream& operator<<(std::ostream& os, const std::forward_list<_Type, _Alloc>& flist){
-	os FLIST_INDENTIFIER << "[ ";
-	for (const auto& element : flist) {
-		os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
-	}
-	os << "]";
-	return os;
+std::ostream& operator<<(std::ostream& os, const std::forward_list<_Type, _Alloc>& flist) {
+    os FLIST_INDENTIFIER << "[ ";
+    for (const auto& element : flist) {
+        os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
+    }
+    os << "]";
+    return os;
 }
 /*-----------------------------------------------------------------------------*/
 #endif
@@ -226,7 +229,7 @@ std::ostream& operator<<(std::ostream& os, const std::stack<_Type, _Container>& 
     auto stack_copy = stack;
 
     os STACK_INDENTIFIER << "[ ";
-    while (stack_copy.size() > 1) {
+    while (stack_copy.size() > 1ULL) {
         os << stack_copy.top() << ", ";
         stack_copy.pop();
     }
@@ -241,7 +244,7 @@ std::ostream& operator<<(std::ostream& os, const std::queue<_Type, _Container>& 
     auto queue_copy = queue;
 
     os QUEUE_INDENTIFIER << "[ ";
-    while (queue_copy.size() > 1) {
+    while (queue_copy.size() > 1ULL) {
         os << queue_copy.front() << ", ";
         queue_copy.pop();
     }
@@ -253,9 +256,9 @@ std::ostream& operator<<(std::ostream& os, const std::queue<_Type, _Container>& 
 template <class _Type, class _Container, class _Compare>
 std::ostream& operator<<(std::ostream& os, const std::priority_queue<_Type, _Container, _Compare>& pqueue) {
     auto pqueue_copy = pqueue;
-    
+
     os PQUEUE_INDENTIFIER << "[ ";
-    while (pqueue_copy.size() > 1) {
+    while (pqueue_copy.size() > 1ULL) {
         os << pqueue_copy.top() << ", ";
         pqueue_copy.pop();
     }
@@ -273,12 +276,12 @@ std::ostream& operator<<(std::ostream& os, const std::priority_queue<_Type, _Con
 template <class _Key, class _Types, class _Compare, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::map<_Key, _Types, _Compare, _Alloc>& map)
 {
-	os MAP_INDENTIFIER << "[ ";
-	for (const auto& element : map) {
-		os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element.first << ":" << element.second USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
-	}
-	os << "]";
-	return os;
+    os MAP_INDENTIFIER << "[ ";
+    for (const auto& element : map) {
+        os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element.first << ":" << element.second USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
+    }
+    os << "]";
+    return os;
 }
 
 template <class _Key, class _Types, class _Compare, class _Alloc>
@@ -327,24 +330,24 @@ std::ostream& operator<<(std::ostream& os, const std::multiset<_Key, _Compare, _
 template <class _Key, class _Types, class _Hasher, class _Keyeq, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::unordered_map<_Key, _Types, _Hasher, _Keyeq, _Alloc>& unordered_map)
 {
-	os UNORDEDED_MAP_INDENTIFIER << "[ ";
-	for (const auto& element : unordered_map) {
-		os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element.first << ":" << element.second USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
-	}
-	os << "]";
-	return os;
+    os UNORDEDED_MAP_INDENTIFIER << "[ ";
+    for (const auto& element : unordered_map) {
+        os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element.first << ":" << element.second USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
+    }
+    os << "]";
+    return os;
 }
 
 template <class _Key, class _Types, class _Hasher, class _Keyeq, class _Alloc>
 std::ostream& operator<<(std::ostream& os, const std::unordered_multimap<_Key, _Types, _Hasher, _Keyeq, _Alloc>& unordered_multimap)
 {
-	os UNORDEDED_MULTIMAP_INDENTIFIER << "[ ";
-	for (const auto& element : unordered_multimap) {
-		os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element.first << ":" << element.second USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
-	}
-	os << "]";
+    os UNORDEDED_MULTIMAP_INDENTIFIER << "[ ";
+    for (const auto& element : unordered_multimap) {
+        os USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_BEGIN << element.first << ":" << element.second USE_CONTAINER_OSTREAMS_ELEMENT_SEPERATOR_END;
+    }
+    os << "]";
 
-	return os;
+    return os;
 }
 
 template <class _Key, class _Hasher, class _Keyeq, class _Alloc>
@@ -375,8 +378,8 @@ std::ostream& operator<<(std::ostream& os, const std::unordered_multiset<_Key, _
 
 #if defined(INCLUDE_TUPLE_OSTREAM_CONTAINER_OVERLOADS)
 /*--------------------These are all the tuples types-----------------------------*/
-template <std::size_t tuple_pos = 0, class... _Types>
-constexpr void print_tuple_excluding_last(std::ostream& os, const std::tuple<_Types...>& tuple){
+template <std::size_t tuple_pos = 0ULL, class... _Types>
+constexpr void print_tuple_excluding_last(std::ostream& os, const std::tuple<_Types...>& tuple) {
 #if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
     if constexpr (tuple_pos == (sizeof...(_Types) - 1ULL)) {
 #else
@@ -388,11 +391,11 @@ constexpr void print_tuple_excluding_last(std::ostream& os, const std::tuple<_Ty
         os << std::get<tuple_pos>(tuple) << ", ";
         print_tuple_excluding_last<tuple_pos + 1ULL>(os, tuple);
     }
-}
+    }
 
 template<class... _Types>
-std::ostream& operator<<(std::ostream& os, const std::tuple<_Types...>& tuple){
-    const auto tuple_last_type = std::tuple_size<std::tuple<_Types...>>::value - 1;
+std::ostream& operator<<(std::ostream & os, const std::tuple<_Types...>&tuple) {
+    const auto tuple_last_type = std::tuple_size<std::tuple<_Types...>>::value - 1ULL;
 
     os << "(";
     print_tuple_excluding_last(os, tuple);
@@ -400,14 +403,15 @@ std::ostream& operator<<(std::ostream& os, const std::tuple<_Types...>& tuple){
     return os;
 }
 
-    template<class _Type1, class _Type2>
-std::ostream& operator<<(std::ostream& os, const std::pair<_Type1, _Type2>& pair) {
+template<class _Type1, class _Type2>
+std::ostream& operator<<(std::ostream & os, const std::pair<_Type1, _Type2>&pair) {
     os << "(" << pair.first << ", " << pair.second << ")";
     return os;
 }
 /*-------------------------------------------------------------------------------*/
 #endif
 
+#endif //CONTAINER_OSTREAMS_GUARD
 //
 //  Container_ostreams.hpp
 //  Created by Timothy van Wees on 23/02/2021.
