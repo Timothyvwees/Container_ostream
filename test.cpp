@@ -3,22 +3,34 @@
 //#define USE_CONTAINER_OSTREAMS_SPACES
 
 #include <chrono>
+#include <random>
+#include <algorithm>
+#include <numeric>
+#include <cassert>
+#include <vector>
+#include <iostream>
+#include <array>
+#include <list>
+#include <map>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
+#include <forward_list>
+#include <thread>
+#include <string>
+#include "container_ostreams.hpp"
 
-#define INCLUDE_TUPLE_OSTREAM_CONTAINER_OVERLOADS
-#define INCLUDE_ALL_OSTREAM_CONTAINER_OVERLOADS
-#include "Container_ostreams.hpp"
-
-//if you use the no tuple version remove all the tuple stuff rom this file
-typedef std::tuple<int, char, std::string, std::vector<std::array<int, 2>>> test_tuple;
+typedef std::tuple<int, char, int> test_tuple;
+typedef std::tuple<std::forward_list<test_tuple>, std::map<uint64_t, std::string, std::greater<uint64_t>>, std::priority_queue<int, std::vector<int>, std::greater<int> >> test_tuple_complex;
 
 int main() {
-    test_tuple tuple00 = { 1, 'a', "hello", {{ 1, 2 }, { 3, 4 }, { 5, 6 }} };
-    test_tuple tuple01 = { 2, 'b', "hello", {{ 1, 2 }, { 3, 4 }, { 5, 6 }} };
-    test_tuple tuple02 = { 3, 'c', "hello", {{ 1, 2 }, { 3, 4 }, { 5, 6 }} };
-    test_tuple tuple03 = { 4, 'd', "hello", {{ 1, 2 }, { 3, 4 }, { 5, 6 }} };
+    test_tuple tuple00 = { 1, 'a', 2 };
+    test_tuple tuple01 = { 2, 'b', 3 };
+    test_tuple tuple02 = { 3, 'c', 4 };
+    test_tuple tuple03 = { 4, 'd', 5 };
 
     std::array<int, 0> array_empty;
-    std::array<int, 1> array_one = {1};
+    std::array<int, 1> array_one = { 1 };
     std::array<int, 5> array0 = { 1, 2, 3, 4, 5 };
     std::array<test_tuple, 4> array1 = { tuple00 , tuple01 , tuple02 , tuple03 };
 
@@ -70,14 +82,14 @@ int main() {
     pqueue1.push(2);
     pqueue1.push(1);
     //
-    std::map<uint64_t, std::string> map0;
-    map0.insert(std::make_pair(1, "hello"));
-    map0.insert(std::make_pair(1, "hello"));
-    map0.insert(std::make_pair(2, "hello"));
-    map0.insert(std::make_pair(3, "hello"));
-    map0.insert(std::make_pair(4, "hello"));
-    map0.insert(std::make_pair(2, "hello"));
-    map0.insert(std::make_pair(1, "hello"));
+    std::map<uint64_t,char> map0;
+    map0.insert(std::make_pair(1, 'a'));
+    map0.insert(std::make_pair(1, 'b'));
+    map0.insert(std::make_pair(2, 'c'));
+    map0.insert(std::make_pair(3, 'd'));
+    map0.insert(std::make_pair(4, 'e'));
+    map0.insert(std::make_pair(2, 'f'));
+    map0.insert(std::make_pair(1, 'g'));
 
     std::map<uint64_t, std::string, std::greater<uint64_t>> map1;
     map1.insert(std::make_pair(1, "hello"));
@@ -88,7 +100,7 @@ int main() {
     map1.insert(std::make_pair(2, "hello"));
     map1.insert(std::make_pair(1, "hello"));
 
-    std::map<uint64_t, test_tuple, std::greater<uint64_t>> map2;
+    std::map<uint64_t, test_tuple, std::less<uint64_t>> map2;
     map2.insert(std::make_pair(1, tuple00));
     map2.insert(std::make_pair(1, tuple00));
     map2.insert(std::make_pair(2, tuple01));
@@ -138,7 +150,14 @@ int main() {
     std::unordered_set<uint64_t, std::hash<uint64_t>, std::equal_to<uint64_t>> unordered_set(temp_arr, temp_arr + 7);
     std::unordered_multiset<uint64_t> unordered_multiset(temp_arr, temp_arr + 7);
 
-    std::pair<int, int> pair = { 1, 2 };
+    std::pair<int, std::string> pair = { 1, "Hello" };
+
+    test_tuple_complex test_tuple_complex1 = { flist1, map1, pqueue1 };
+
+    std::map<uint64_t, test_tuple_complex> map_complex;
+    map_complex.insert(std::make_pair(uint64_t{ 1 }, test_tuple_complex1));
+    map_complex.insert(std::make_pair(uint64_t{ 2 }, test_tuple_complex1));
+    map_complex.insert(std::make_pair(uint64_t{ 3 }, test_tuple_complex1));
 
     std::cout << "array0: " << array0 << std::endl;
     std::cout << "array1: " << array1 << std::endl;
@@ -156,42 +175,43 @@ int main() {
     //auto t1 = std::chrono::steady_clock::now();
     //for (std::size_t i = 0; i < 1000; i++) {
 
-        std::cout << "list0: " << list0 << std::endl;
-        std::cout << "list1: " << list1 << std::endl;
-        std::cout << std::endl;
+    std::cout << "list0: " << list0 << std::endl;
+    std::cout << "list1: " << list1 << std::endl;
+    std::cout << std::endl;
 
-        std::cout << "flist0: " << flist0 << std::endl;
-        std::cout << "flist1: " << flist1 << std::endl;
-        std::cout << std::endl;
+    std::cout << "flist0: " << flist0 << std::endl;
+    std::cout << "flist1: " << flist1 << std::endl;
+    std::cout << std::endl;
 
-        std::cout << std::endl;
-        std::cout << "stack0: " << stack0 << std::endl;
-        std::cout << "queue0: " << queue0 << std::endl;
-        std::cout << "pqueue0: " << pqueue0 << std::endl;
-        std::cout << "pqueue1: " << pqueue1 << std::endl;
-        std::cout << std::endl;
+    std::cout << "stack0: " << stack0 << std::endl;
+    std::cout << "queue0: " << queue0 << std::endl;
+    std::cout << "pqueue0: " << pqueue0 << std::endl;
+    std::cout << "pqueue1: " << pqueue1 << std::endl;
+    std::cout << std::endl;
 
-        std::cout << "map0: " << map0 << std::endl;
-        std::cout << "map1: " << map1 << std::endl;
-        std::cout << "map2: " << map2 << std::endl;
-        std::cout << "unordered_map: " << unordered_map << std::endl;
-        std::cout << "multimap: " << multimap << std::endl;
-        std::cout << "unordered_multimap: " << unordered_multimap << std::endl;
-        std::cout << unordered_multimap_one << std::endl; 
-        std::cout << unordered_multimap_empty << std::endl;
-        std::cout << std::endl;
+    std::cout << "map0: " << map0 << std::endl;
+    std::cout << "hello" << std::endl;
+    std::cout << "map1: " << map1 << std::endl;
+    std::cout << "map2: " << map2 << std::endl;
+    std::cout << "unordered_map: " << unordered_map << std::endl;
+    std::cout << "multimap: " << multimap << std::endl;
+    std::cout << "unordered_multimap: " << unordered_multimap << std::endl;
+    std::cout << unordered_multimap_one << std::endl;
+    std::cout << unordered_multimap_empty << std::endl;
+    std::cout << std::endl;
 
-        std::cout << "set: " << set << std::endl;
-        std::cout << "multi_set: " << multi_set << std::endl;
-        std::cout << "unordered_set: " << unordered_set << std::endl;
-        std::cout << "unordered_multiset: " << unordered_multiset << std::endl;
-        std::cout << std::endl;
+    std::cout << "set: " << set << std::endl;
+    std::cout << "multi_set: " << multi_set << std::endl;
+    std::cout << "unordered_set: " << unordered_set << std::endl;
+    std::cout << "unordered_multiset: " << unordered_multiset << std::endl;
+    std::cout << std::endl;
     //}
     //auto t2 = std::chrono::steady_clock::now();
     //auto dur = t2 - t1;
     //std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(dur).count() << std::endl;
     std::cout << "pair: " << pair << std::endl;
     std::cout << "tuple: " << tuple00 << std::endl;
+    std::cout << "map_complex: " << map_complex << std::endl;
 
     return 0;
 }
